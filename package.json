@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/EugeneLanets/food_dairy/issues"
   },
-  "homepage": "https://github.com/EugeneLanets/food_dairy#readme"
+  "homepage": "https://github.com/EugeneLanets/food_dairy#readme",
+  "devDependencies": {
+    "nodemon": "2.0.19"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "node-telegram-bot-api": "0.58.0"
+  }
 }
