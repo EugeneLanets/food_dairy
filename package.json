@@ -1,0 +1,19 @@
+{
+  "name": "food_dairy",
+  "version": "1.0.0",
+  "description": "Food Diary Telegram bot for personal purposes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EugeneLanets/food_dairy.git"
+  },
+  "author": "Eugene Lanets",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EugeneLanets/food_dairy/issues"
+  },
+  "homepage": "https://github.com/EugeneLanets/food_dairy#readme"
+}
