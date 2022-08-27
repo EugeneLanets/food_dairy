@@ -1,14 +1,23 @@
 const { Telegraf, Markup } = require('telegraf');
-const dotenv = require('dotenv');
-dotenv.config();
+const {MONGODB_URI, TOKEN} = require("./src/config");
+const mongoose = require('mongoose');
+const Measurement = require('./src/models/measurements');
 
-const {TOKEN: token} = process.env;
+const bot = new Telegraf(TOKEN);
 
-const bot = new Telegraf(token);
+mongoose.connect(MONGODB_URI)
 
 bot.start((ctx) => {
-  console.log(ctx.update.message.from);
   ctx.reply('hi');
+});
+
+bot.command('me', async (ctx) => {
+  const measurement = new Measurement({
+    date: new Date(),
+    plasma: 5.5,
+    blood: 5.5,
+  });
+  await measurement.save();
 })
 
 bot.launch();
