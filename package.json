@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Food Diary Telegram bot for personal purposes",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
@@ -19,6 +20,9 @@
   },
   "homepage": "https://github.com/EugeneLanets/food_dairy#readme",
   "devDependencies": {
+    "eslint": "8.22.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
     "nodemon": "2.0.19"
   },
   "dependencies": {
