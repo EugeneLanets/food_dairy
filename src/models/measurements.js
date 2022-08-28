@@ -1,4 +1,6 @@
-const { Schema, SchemaTypes, model } = require('mongoose');
+import mongoose from 'mongoose';
+
+const { Schema, SchemaTypes, model } = mongoose;
 
 const measurementSchema = new Schema({
   date: Date,
@@ -6,10 +8,10 @@ const measurementSchema = new Schema({
   blood: Number,
   type: String,
   user: {
-    type: SchemaTypes.ObjectId,
+    type: SchemaTypes.Number,
     ref: 'User',
     required: true,
   },
 });
 
-module.exports = model('Measurement', measurementSchema);
+export default model('Measurement', measurementSchema);

@@ -20,6 +20,8 @@ start.enter(async (ctx) => {
     await ctx.reply('Вижу вас как наяву!');
     await ctx.reply(`Я запомню вас, ${ctx.from.first_name}`);
   }
+
+  ctx.scene.enter('main');
 });
 
 export default start;

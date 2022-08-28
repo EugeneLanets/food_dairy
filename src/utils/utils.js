@@ -1,5 +1,3 @@
-const convertPlasmaToBlood = (plasma) => 0.88 * plasma;
+export const convertPlasmaToBlood = (plasma) => 0.88 * plasma;
 
-module.exports = {
-  convertPlasmaToBlood,
-};
+export const getMeasurementType = (str) => str.split('_')[0];
