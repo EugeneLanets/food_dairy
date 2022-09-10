@@ -5,7 +5,6 @@ import { convertPlasmaToBlood, getMeasurementType } from '../utils/utils.js';
 const measurement = new Scenes.BaseScene('measurement');
 
 measurement.enter((ctx) => {
-  ctx.session.myData = {};
   ctx.reply(
     'Вносим значение до или после еды',
     Markup.inlineKeyboard([
@@ -19,8 +18,24 @@ measurement.action(
   /[A-Z]*_FOOD/,
   (ctx) => {
     const type = getMeasurementType(ctx.match.input);
-    ctx.session.myData.type = type;
-    ctx.reply('Введите значение');
+    ctx.session.currentMeasurement.type = type;
+    ctx.reply(
+      'Что дальше?',
+      Markup.inlineKeyboard([
+        Markup.button.callback('Ввести значение', 'VALUE'),
+        Markup.button.callback(
+          'Выбрать дату и время измерения',
+          'SET_DATETIME',
+        ),
+      ]),
+    );
+  },
+);
+
+measurement.action(
+  /SET_DATETIME/,
+  (ctx) => {
+    ctx.scene.enter('time');
   },
 );
 
@@ -35,7 +50,7 @@ measurement.hears(
       date: new Date(),
       plasma,
       blood,
-      type: ctx.session.myData.type,
+      type: ctx.session.currentMeasurement.type,
       user: uid,
     });
     await newMeasurement.save();
