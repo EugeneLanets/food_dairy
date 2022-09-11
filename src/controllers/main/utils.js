@@ -1,7 +1,6 @@
 import { Markup } from 'telegraf';
 
-// eslint import/prefer-default-export: false;
-export const getMainKeyboard = (isDateSet) => {
+const getMainKeyboard = (isDateSet) => {
   const dateButtonMessages = {
     true: 'Сбросить дату',
     false: 'Установить дату',
@@ -25,11 +24,16 @@ export const getMainKeyboard = (isDateSet) => {
   return Markup.inlineKeyboard(keyboard);
 };
 
-export const getSessionState = (session, action = 'SET') => {
+const getSessionState = (session, action = 'SET') => {
   if (session.state && action !== 'RESET') {
     const { userDate } = session.state;
     return { userDate };
   }
 
   return { userDate: false };
+};
+
+export default {
+  getMainKeyboard,
+  getSessionState,
 };
