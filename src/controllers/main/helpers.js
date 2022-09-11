@@ -1,11 +1,10 @@
 import { Markup } from 'telegraf';
 
-// eslint-disable-next-line import/prefer-default-export
+// eslint import/prefer-default-export: false;
 export const getMainKeyboard = (isDateSet) => {
-  const dateStatus = isDateSet ? 'set' : 'notset';
   const dateButtonMessages = {
-    set: 'Сбросить дату',
-    notset: 'Установить дату',
+    true: 'Сбросить дату',
+    false: 'Установить дату',
   };
 
   const keyboard = [
@@ -18,10 +17,19 @@ export const getMainKeyboard = (isDateSet) => {
       'FOOD_ACTION',
     ),
     Markup.button.callback(
-      dateButtonMessages[dateStatus],
+      dateButtonMessages[isDateSet],
       'SET_DATE',
     ),
   ];
 
   return Markup.inlineKeyboard(keyboard);
+};
+
+export const getSessionState = (session, action = 'SET') => {
+  if (session.state && action !== 'RESET') {
+    const { userDate } = session.state;
+    return { userDate };
+  }
+
+  return { userDate: false };
 };

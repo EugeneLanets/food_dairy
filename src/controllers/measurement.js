@@ -5,6 +5,7 @@ import { convertPlasmaToBlood, getMeasurementType } from '../utils/utils.js';
 const measurement = new Scenes.BaseScene('measurement');
 
 measurement.enter((ctx) => {
+  console.log(ctx.session);
   ctx.reply(
     'Вносим значение до или после еды',
     Markup.inlineKeyboard([
@@ -12,6 +13,10 @@ measurement.enter((ctx) => {
       Markup.button.callback('После еды', 'AFTER_FOOD'),
     ]),
   );
+});
+
+measurement.command('main', (ctx) => {
+  ctx.scene.enter('main');
 });
 
 measurement.action(
