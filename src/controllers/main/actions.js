@@ -1,11 +1,12 @@
-import utils from './utils.js';
+import utils from '../../utils/utils.js';
+import sceneUtils from './utils.js';
 
 const onEnter = async (ctx) => {
   const { session } = ctx;
   session.state = utils.getSessionState(session);
   const { userDate } = session.state;
 
-  const keyboard = utils.getMainKeyboard(
+  const keyboard = sceneUtils.getMainKeyboard(
     Boolean(userDate),
   );
   ctx.reply('Чем займёмся?', keyboard);
@@ -19,7 +20,7 @@ const onSetDate = async (ctx) => {
   } else {
     session.state = utils.getSessionState(session, 'RESET');
     const { text } = ctx.update.callback_query.message;
-    const keyboard = utils.getMainKeyboard();
+    const keyboard = sceneUtils.getMainKeyboard();
     await ctx.editMessageText(text, keyboard);
     await ctx.answerCbQuery('Пользовательсякая дата успешно сброшена');
   }
