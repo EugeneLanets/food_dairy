@@ -1,6 +1,6 @@
 import { Markup } from 'telegraf';
 
-const getMainKeyboard = (isDateSet) => {
+const getMainKeyboard = (isDateSet = false) => {
   const dateButtonMessages = {
     true: 'Сбросить дату',
     false: 'Установить дату',

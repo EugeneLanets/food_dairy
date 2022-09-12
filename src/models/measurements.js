@@ -6,6 +6,7 @@ const measurementSchema = new Schema({
   date: Date,
   plasma: Number,
   blood: Number,
+  meal: String,
   type: String,
   user: {
     type: SchemaTypes.Number,

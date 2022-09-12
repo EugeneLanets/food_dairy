@@ -1,3 +1,5 @@
-export const convertPlasmaToBlood = (plasma) => 0.88 * plasma;
+const getUpdatedState = (state, key, value) => ({ ...state, key: value });
 
-export const getMeasurementType = (str) => str.split('_')[0];
+export default {
+  getUpdatedState,
+};

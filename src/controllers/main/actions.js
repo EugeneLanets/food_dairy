@@ -19,7 +19,7 @@ const onSetDate = async (ctx) => {
   } else {
     session.state = utils.getSessionState(session, 'RESET');
     const { text } = ctx.update.callback_query.message;
-    const keyboard = utils.getMainKeyboard(false);
+    const keyboard = utils.getMainKeyboard();
     await ctx.editMessageText(text, keyboard);
     await ctx.answerCbQuery('Пользовательсякая дата успешно сброшена');
   }
@@ -34,8 +34,8 @@ const onDateTyped = async (ctx) => {
   await scene.enter('main');
 };
 
-const onMeasurementAction = async (ctx) => {
-  await ctx.scene.enter('measurement');
+const onMeasurementsAction = async (ctx) => {
+  await ctx.scene.enter('measurements');
 };
 
 const onFoodAction = async (ctx) => {
@@ -46,6 +46,6 @@ export default {
   onDateTyped,
   onEnter,
   onFoodAction,
-  onMeasurementAction,
+  onMeasurementsAction,
   onSetDate,
 };
