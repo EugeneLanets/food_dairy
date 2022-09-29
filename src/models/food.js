@@ -1,18 +1,16 @@
-const { Schema, SchemaTypes, model } = require('mongoose');
+import mongoose from 'mongoose';
+
+const { Schema, SchemaTypes, model } = mongoose;
 
 const foodSchema = new Schema({
   type: String,
   user: {
-    type: SchemaTypes.ObjectId,
+    type: SchemaTypes.Number,
     ref: 'User',
     required: true,
   },
   description: String,
-  structure: [{
-    name: String,
-    quantity: Number,
-  }],
   date: Date,
 });
 
-module.exports = model('User', foodSchema);
+export default model('Food', foodSchema);

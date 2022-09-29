@@ -7,6 +7,11 @@ const getSessionState = (session, action = 'SET') => {
   return { userDate: false };
 };
 
+const getActionType = (str, separator = '_') => (
+  str.split(separator)[0].toLowerCase()
+);
+
 export default {
   getSessionState,
+  getActionType,
 };

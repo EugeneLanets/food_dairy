@@ -51,7 +51,7 @@ const onValueInput = async (ctx) => {
 
   try {
     await newMeasurement.save(newMeasurement);
-    ctx.reply('Ваше измерение успешно сохранено!');
+    await ctx.reply('Ваше измерение успешно сохранено!');
   } catch (err) {
     console.log('Something wrong', err);
   }
