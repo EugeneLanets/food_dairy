@@ -1,38 +1,32 @@
-import utils from '../../utils/utils.js';
-import sceneUtils from './utils.js';
+import utils from '../../utils/index.js';
 
 const onEnter = async (ctx) => {
-  const { session } = ctx;
-  session.state = utils.getSessionState(session);
-  const { userDate } = session.state;
-
-  const keyboard = sceneUtils.getMainKeyboard(
-    Boolean(userDate),
-  );
-  ctx.reply('Чем займёмся?', keyboard);
+  const keyboard = utils.getKeyboard('main', ctx);
+  ctx.reply('Что вносим?', keyboard);
 };
 
 const onSetDate = async (ctx) => {
-  const { session } = ctx;
-  const { userDate } = session.state;
+  const state = utils.getState(ctx);
+  const { userDate } = state;
   if (!userDate) {
-    ctx.reply('Введите дату в формате дд-мм-гггг');
+    ctx.editMessageText('Введите дату в формате дд-мм-гггг');
   } else {
-    session.state = utils.getSessionState(session, 'RESET');
     const { text } = ctx.update.callback_query.message;
-    const keyboard = sceneUtils.getMainKeyboard();
+    utils.setUserDate(ctx);
+    await ctx.answerCbQuery('Пользовательская дата успешно сброшена');
+    const keyboard = utils.getKeyboard('main', ctx);
     await ctx.editMessageText(text, keyboard);
-    await ctx.answerCbQuery('Пользовательсякая дата успешно сброшена');
   }
 };
 
 const onDateTyped = async (ctx) => {
-  const { match: { input }, session: { state }, scene } = ctx;
-  const userDate = new Date(input.split('-').reverse().join('-'));
+  const { match: { input } } = ctx;
+  const userDate = utils.getUserDate(input);
 
-  state.userDate = userDate;
+  utils.setUserDate(ctx, userDate);
+
   await ctx.reply('Дата успешно установлена');
-  await scene.enter('main');
+  await ctx.scene.enter('main');
 };
 
 const onMeasurementsAction = async (ctx) => {
